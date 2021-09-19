@@ -16,6 +16,6 @@ public class Menu {
     }
     
     public static void prompt() {
-    	System.out.print("Command > ");
+    	System.out.print("\nCommand > ");
     }
 }
