@@ -5,14 +5,14 @@ public class Menu {
     {
         System.out.println();
         System.out.println("<TodoList 관리 명령어>");
-        System.out.println("add  | 새로운 항목 추가하기");
-        System.out.println("del  | 기존의 항목 삭제하기");
-        System.out.println("edit | 기존의 항목 수정하기");
-        System.out.println("ls   | 리스트 전체 불러오기");
-        System.out.println("ls_name_asc  | 항목들 제목순으로 정렬하기");
-        System.out.println("ls_name_desc | 항목들 제목역순으로 정렬하기");
-        System.out.println("ls_date		 | 항목들 날짜순으로 정렬하기");
-        System.out.println("exit | 프로그램 종료하기");
+        System.out.println(" add - 새로운 항목 추가하기");
+        System.out.println(" del - 기존의 항목 삭제하기");
+        System.out.println(" edit - 기존의 항목 수정하기");
+        System.out.println(" ls - 리스트 전체 불러오기");
+        System.out.println(" ls_name_asc - 항목들 제목순으로 정렬하기");
+        System.out.println(" ls_name_desc - 항목들 제목역순으로 정렬하기");
+        System.out.println(" ls_date - 항목들 날짜순으로 정렬하기");
+        System.out.println(" exit - 프로그램 종료하기");
     }
     
     public static void prompt() {

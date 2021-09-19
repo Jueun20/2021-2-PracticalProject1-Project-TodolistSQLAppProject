@@ -17,6 +17,7 @@ public class TodoMain {
 		
 		Menu.displaymenu();
 		do {
+			Menu.prompt();
 			isList = false;
 			String choice = sc.next();
 			switch (choice) {
@@ -72,5 +73,6 @@ public class TodoMain {
 			
 			if(isList) TodoUtil.listAll(l);
 		} while (!quit);
+		System.out.println("프로그램이 종료되었습니다.");
 	}
 }

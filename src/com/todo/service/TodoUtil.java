@@ -20,11 +20,14 @@ public class TodoUtil {
 			return;
 		}
 		
+		sc.nextLine();
 		System.out.print("추가할 항목의 내용을 입력하세요 > ");
 		desc = sc.nextLine().trim();
 		
 		TodoItem t = new TodoItem(title, desc);
 		list.addItem(t);
+		
+		System.out.println("새로운 항목이 추가되었습니다.");
 	}
 
 	public static void deleteItem(TodoList l) {
@@ -33,6 +36,11 @@ public class TodoUtil {
 		
 		System.out.print("[항목 삭제]\n" + "삭제할 항목의 제목을 입력하세요 > ");
 		String title = sc.next().trim();
+		
+		if (!l.isDuplicate(title)) {
+			System.out.println("제목 [" + title + "] 이 존재하지 않습니다!");
+			return;
+		}
 		
 		for (TodoItem item : l.getList()) {
 			if (title.equals(item.getTitle())) {
@@ -64,6 +72,7 @@ public class TodoUtil {
 			return;
 		}
 		
+		sc.nextLine();
 		System.out.print("새로운 내용을 입력하세요 > ");
 		String new_description = sc.nextLine().trim();
 		
@@ -79,7 +88,7 @@ public class TodoUtil {
 	}
 
 	public static void listAll(TodoList l) {
-		System.out.println("[전체 목록]");
+		System.out.println(":: 전체 목록 ::");
 		for (TodoItem item : l.getList()) {
 			System.out.println(item.toString());
 		}
