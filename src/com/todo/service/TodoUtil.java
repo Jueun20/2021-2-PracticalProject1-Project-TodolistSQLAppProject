@@ -1,5 +1,8 @@
 package com.todo.service;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.*;
 
 import com.todo.dao.TodoItem;
@@ -30,6 +33,7 @@ public class TodoUtil {
 		System.out.println("새로운 항목이 추가되었습니다.");
 	}
 
+	
 	public static void deleteItem(TodoList l) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -51,7 +55,7 @@ public class TodoUtil {
 		}
 	}
 
-
+	
 	public static void updateItem(TodoList l) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -87,10 +91,35 @@ public class TodoUtil {
 
 	}
 
+	
 	public static void listAll(TodoList l) {
 		System.out.println(":: 전체 목록 ::");
 		for (TodoItem item : l.getList()) {
 			System.out.println(item.toString());
 		}
+	}
+	
+	
+	public static void saveList(TodoList l, String filename){
+		try {
+			Writer w = new FileWriter(filename);
+			int count = 0;
+			for (TodoItem item : l.getList()) {
+				w.write(item.toSaveString());
+				count ++;
+			}
+			w.close();
+			
+			System.out.println(count + "개의 항목이 파일에 저장되었습니다.");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public static void loadList(TodoList l, String filename){
+		
 	}
 }
