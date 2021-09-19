@@ -1,5 +1,8 @@
 package com.todo.service;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -119,7 +122,22 @@ public class TodoUtil {
 	}
 	
 	
-	public static void loadList(TodoList l, String filename){
-		
+	public static void loadList(TodoList l, String filename) throws IOException{
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(filename));
+			String line = "";
+			int count = 0;
+			while (( line = reader.readLine() )!= null){
+				StringTokenizer str = new StringTokenizer(line, "##");
+				TodoItem t = new TodoItem(str.nextToken(), str.nextToken(), str.nextToken());
+				l.addItem(t);
+				count ++;
+			}
+			System.out.println(filename + " 에서 " + count + "개의 데이터를 불러왔습니다.");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(filename + " 파일이 존재하지 않습니다.");
+			return;
+		}
 	}
 }

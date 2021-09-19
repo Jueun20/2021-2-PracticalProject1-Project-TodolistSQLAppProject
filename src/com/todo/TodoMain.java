@@ -1,5 +1,6 @@
 package com.todo;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import com.todo.dao.TodoList;
@@ -8,12 +9,14 @@ import com.todo.service.TodoUtil;
 
 public class TodoMain {
 	
-	public static void start() {
+	public static void start() throws IOException {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
 		boolean isList = false;
 		boolean quit = false;
+		
+		TodoUtil.loadList(l, "todolist.txt");
 		
 		Menu.displaymenu();
 		do {
