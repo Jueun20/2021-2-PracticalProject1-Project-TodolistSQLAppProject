@@ -96,7 +96,10 @@ public class TodoUtil {
 
 	
 	public static void listAll(TodoList l) {
-		System.out.println(":: 전체 목록 ::");
+		ArrayList list = l.getList();
+		int count = list.size();
+		
+		System.out.println(":: 전체 목록 (총 " + count + "개) ::");
 		for (TodoItem item : l.getList()) {
 			System.out.println(item.toString());
 		}
