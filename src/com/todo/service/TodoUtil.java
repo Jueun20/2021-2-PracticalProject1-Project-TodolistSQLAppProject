@@ -15,7 +15,7 @@ public class TodoUtil {
 	
 	public static void createItem(TodoList list) {
 		
-		String title, desc;
+		String title, desc, category, due_date;
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("[항목 추가]\n" + "추가할 항목의 제목을 입력하세요 > ");
@@ -27,10 +27,17 @@ public class TodoUtil {
 		}
 		
 		sc.nextLine();
+		System.out.print("추가할 항목의 카테고리를 입력하세요 > ");
+		category = sc.next().trim();
+		
+		sc.nextLine();
 		System.out.print("추가할 항목의 내용을 입력하세요 > ");
 		desc = sc.nextLine().trim();
+
+		System.out.print("추가할 항목의 마감 날짜를 입력하세요(YYYY/MM/DD) > ");
+		due_date = sc.next().trim();
 		
-		TodoItem t = new TodoItem(title, desc);
+		TodoItem t = new TodoItem(category, title, desc, due_date);
 		list.addItem(t);
 		
 		System.out.println("새로운 항목이 추가되었습니다.");
@@ -80,13 +87,21 @@ public class TodoUtil {
 		}
 		
 		sc.nextLine();
+		System.out.print("새로운 카테고리를 입력하세요 > ");
+		String new_cate = sc.next().trim();
+		
+		sc.nextLine();
 		System.out.print("새로운 내용을 입력하세요 > ");
 		String new_description = sc.nextLine().trim();
+		
+		sc.nextLine();
+		System.out.print("새로운 마감 날짜를 입력하세요(YYYY/MM/DD) > ");
+		String new_due = sc.next().trim();
 		
 		for (TodoItem item : l.getList()) {
 			if (item.getTitle().equals(title)) {
 				l.deleteItem(item);
-				TodoItem t = new TodoItem(new_title, new_description);
+				TodoItem t = new TodoItem(new_title, new_description, new_cate, new_due);
 				l.addItem(t);
 				System.out.println("수정되었습니다.");
 			}
@@ -132,7 +147,7 @@ public class TodoUtil {
 			int count = 0;
 			while (( line = reader.readLine() )!= null){
 				StringTokenizer str = new StringTokenizer(line, "##");
-				TodoItem t = new TodoItem(str.nextToken(), str.nextToken(), str.nextToken());
+				TodoItem t = new TodoItem (str.nextToken(), str.nextToken(), str.nextToken(), str.nextToken(), str.nextToken());
 				l.addItem(t);
 				count ++;
 			}
