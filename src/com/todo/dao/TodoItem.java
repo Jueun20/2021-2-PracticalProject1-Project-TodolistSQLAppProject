@@ -52,6 +52,10 @@ public class TodoItem {
         this.current_date = current_date;
     }
     
+    public String getCategory() {
+        return category;
+    }
+    
     @Override
     public String toString() {
     	return "[" + category + "] " + "|" + title + "| " + desc + " (" + due_date + ")" + " - " + current_date;

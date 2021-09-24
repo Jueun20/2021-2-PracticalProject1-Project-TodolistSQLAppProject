@@ -20,7 +20,7 @@ public class TodoList {
 		list.remove(t);
 	}
 
-	void editItem(TodoItem t, TodoItem updated) {
+	public void editItem(TodoItem t, TodoItem updated) {
 		int index = list.indexOf(t);
 		list.remove(index);
 		list.add(updated);

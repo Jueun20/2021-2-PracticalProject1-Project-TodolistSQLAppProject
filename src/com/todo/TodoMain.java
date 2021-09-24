@@ -22,7 +22,11 @@ public class TodoMain {
 		do {
 			Menu.prompt();
 			isList = false;
-			String choice = sc.next();
+			String[] input = sc.nextLine().trim().split(" ");
+			String choice = input[0];
+			String keyWord = "";
+			if (input.length == 2)
+				 keyWord = input[1];
 			switch (choice) {
 
 			case "add":
@@ -37,10 +41,22 @@ public class TodoMain {
 				TodoUtil.updateItem(l);
 				break;
 				
+			case "find":
+				TodoUtil.findItem(l, keyWord);
+				break;
+				
+			case "find_cate":
+				TodoUtil.findCate(l, keyWord);
+				break;
+				
 			case "ls":
 				TodoUtil.listAll(l);
 				break;
-
+			
+			case "ls_cate":
+				TodoUtil.listAllCate(l);
+				break;
+				
 			case "ls_name_asc":
 				l.sortByName();
 				System.out.println("리스트의 항목들을 제목순으로 정렬하였습니다.");
@@ -57,6 +73,13 @@ public class TodoMain {
 			case "ls_date":
 				l.sortByDate();
 				System.out.println("리스트의 항목들을 날짜순으로 정렬하였습니다.");
+				isList = true;
+				break;
+				
+			case "ls_date_desc":
+				l.sortByDate();
+				System.out.println("리스트의 항목들을 날짜의 역순으로 정렬하였습니다.");
+				l.reverseList();
 				isList = true;
 				break;
 				

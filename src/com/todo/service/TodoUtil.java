@@ -46,23 +46,32 @@ public class TodoUtil {
 	
 	public static void deleteItem(TodoList l) {
 		
+		ArrayList list = l.getList();
+		int count = list.size();
+		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("[항목 삭제]\n" + "삭제할 항목의 제목을 입력하세요 > ");
-		String title = sc.next().trim();
+		System.out.print("[항목 삭제]\n" + "삭제할 항목의 번호를 입력하세요 > ");
+		int num = sc.nextInt();
 		
-		if (!l.isDuplicate(title)) {
-			System.out.println("제목 [" + title + "] 이 존재하지 않습니다!");
+		if (num < 0 || num > list.size()) {
+			System.out.println("번호가 잘못되었습니다!");
 			return;
 		}
 		
+		int index = num - 1;
+		TodoItem title = (TodoItem) list.get(index);
+		l.deleteItem(title);
+		System.out.println(num + "번 항목이 삭제되었습니다.");
+		/*
 		for (TodoItem item : l.getList()) {
-			if (title.equals(item.getTitle())) {
+			if (title.equals(title)) {
 				l.deleteItem(item);
-				System.out.println("[" + title + "] 제목의 항목이 삭제되었습니다.");
+				System.out.println(num + "번 항목이 삭제되었습니다.");
 				break;
 			}
 		}
+		*/
 	}
 
 	
@@ -70,13 +79,20 @@ public class TodoUtil {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("[항목 수정]\n" + "수정할 항목의 제목을 입력하세요 > ");
-		String title = sc.next().trim();
+		ArrayList<TodoItem> list = l.getList();
+		int count = list.size();
 		
-		if (!l.isDuplicate(title)) {
-			System.out.println("제목 [" + title + "] 이 존재하지 않습니다!");
+		System.out.print("[항목 수정]\n" + "수정할 항목의 번호를 입력하세요 > ");
+		int num = sc.nextInt();
+		
+		if (num < 0 || num > list.size()) {
+			System.out.println("번호가 잘못되었습니다!");
 			return;
 		}
+		
+		int index = num - 1;
+		TodoItem editem = (TodoItem) list.get(index);
+		String title = editem.getTitle();
 
 		System.out.print("새로운 제목을 입력하세요 > ");
 		String new_title = sc.next().trim();
@@ -93,31 +109,88 @@ public class TodoUtil {
 		sc.nextLine();
 		System.out.print("새로운 내용을 입력하세요 > ");
 		String new_description = sc.nextLine().trim();
-		
-		sc.nextLine();
+
 		System.out.print("새로운 마감 날짜를 입력하세요(YYYY/MM/DD) > ");
 		String new_due = sc.next().trim();
 		
 		for (TodoItem item : l.getList()) {
 			if (item.getTitle().equals(title)) {
-				l.deleteItem(item);
+				//l.deleteItem(item);
 				TodoItem t = new TodoItem(new_title, new_description, new_cate, new_due);
-				l.addItem(t);
+				l.editItem(item, t);
 				System.out.println("수정되었습니다.");
 			}
 		}
-
+		
 	}
 
 	
 	public static void listAll(TodoList l) {
-		ArrayList list = l.getList();
+		ArrayList<TodoItem> list = l.getList();
 		int count = list.size();
 		
 		System.out.println(":: 전체 목록 (총 " + count + "개) ::");
 		for (TodoItem item : l.getList()) {
+			int num = l.indexOf(item) + 1;
+			System.out.print(num + ". ");
 			System.out.println(item.toString());
 		}
+	}
+	
+	
+	public static void findItem(TodoList l, String f) {
+		int count = 0;
+		for (TodoItem item : l.getList()) {
+			if (item.getTitle().contains(f) || item.getDesc().contains(f)) {
+				int num = l.indexOf(item) + 1;
+				System.out.print(num + ". ");
+				System.out.println(item.toString());
+				count = count + 1;
+			}
+		}
+		System.out.println("총 " + count + "개의 항목을 찾았습니다.");
+	}
+	
+	
+	public static void findCate(TodoList l, String f) {
+		int count = 0;
+		for (TodoItem item : l.getList()) {
+			if (item.getCategory().contains(f)) {
+				int num = l.indexOf(item) + 1;
+				System.out.print(num + ". ");
+				System.out.println(item.toString());
+				count = count + 1;
+			}
+		}
+		System.out.println("총 " + count + "개의 항목을 찾았습니다.");
+	}
+	
+	
+	
+	public static void listAllCate(TodoList l) {
+		LinkedHashSet<String> set = new LinkedHashSet<String>();
+		ArrayList<String> arry = new ArrayList<String>();
+		
+		for (TodoItem item : l.getList()) {
+			set.add(item.getCategory());
+		}
+		
+		Iterator<String> iter = set.iterator();	
+		while(iter.hasNext()) {
+		    arry.add(iter.next());
+		}
+		
+		for (int i = 0; i < set.size(); i ++) {
+			if (i != set.size() - 1) {
+				
+				System.out.print(arry.get(i) + " / ");
+			}
+			else {
+				System.out.println(arry.get(i));
+			}
+		}
+		
+		System.out.println("총 " + set.size() + "개의 카테고리가 등록되어 있습니다.");
 	}
 	
 	
