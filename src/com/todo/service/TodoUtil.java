@@ -60,9 +60,14 @@ public class TodoUtil {
 		}
 		
 		int index = num - 1;
-		TodoItem title = (TodoItem) list.get(index);
-		l.deleteItem(title);
-		System.out.println(num + "번 항목이 삭제되었습니다.");
+		TodoItem deliItem = (TodoItem) list.get(index);
+		System.out.print(num + "번 항목을 정말로 삭제할까요?(Y/N) > ");
+		String answer = sc.next().trim();
+		
+		if(answer.contains("Y")) {
+			l.deleteItem(deliItem);
+			System.out.println(num + "번 항목이 삭제되었습니다.");
+		}
 		/*
 		for (TodoItem item : l.getList()) {
 			if (title.equals(title)) {
@@ -93,6 +98,8 @@ public class TodoUtil {
 		int index = num - 1;
 		TodoItem editem = (TodoItem) list.get(index);
 		String title = editem.getTitle();
+		
+		System.out.println(num + ". " + editem.toString() + "\n");
 
 		System.out.print("새로운 제목을 입력하세요 > ");
 		String new_title = sc.next().trim();
@@ -116,7 +123,7 @@ public class TodoUtil {
 		for (TodoItem item : l.getList()) {
 			if (item.getTitle().equals(title)) {
 				//l.deleteItem(item);
-				TodoItem t = new TodoItem(new_title, new_description, new_cate, new_due);
+				TodoItem t = new TodoItem(new_cate, new_title, new_description, new_due);
 				l.editItem(item, t);
 				System.out.println("수정되었습니다.");
 			}
