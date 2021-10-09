@@ -1,6 +1,7 @@
 package com.todo;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.todo.dao.TodoList;
@@ -9,10 +10,12 @@ import com.todo.service.TodoUtil;
 
 public class TodoMain {
 	
-	public static void start() throws IOException {
+	public static void start() throws IOException, SQLException {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
+		l.importData("todolist.txt");
+		
 		boolean isList = false;
 		boolean quit = false;
 		
