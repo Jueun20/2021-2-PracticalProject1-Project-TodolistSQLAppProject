@@ -16,6 +16,8 @@ public class Menu {
         System.out.println(" ls_name_desc - 항목들 제목역순으로 정렬하기");
         System.out.println(" ls_date - 항목들 날짜순으로 정렬하기");
         System.out.println(" ls_date_desc - 항목들 날짜역순으로 정렬하기");
+        System.out.println(" comp <num> - 항목 완료하기");
+        System.out.println(" ls_comp - 완료된 항목만 출력하기");
         System.out.println(" exit - 프로그램 종료하기");
     }
     

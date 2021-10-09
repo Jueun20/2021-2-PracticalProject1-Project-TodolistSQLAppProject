@@ -129,7 +129,11 @@ public class TodoUtil {
 		if (l.updateItem(t) > 0)
 			System.out.println(index + "번 항목이 수정되었습니다.");
 	}
-
+	
+	public static void completeItem(TodoList l, int index) {
+		if (l.completeItem(index) > 0)
+			System.out.println(index + "번 항목이 완료되었습니다.");
+	}
 	
 	public static void listAll(TodoList l) {
 		System.out.printf(":: 전체 목록 (총 %d개) ::\n", l.getCount());
@@ -151,7 +155,7 @@ public class TodoUtil {
 			System.out.println(item.toString());
 		}
 	}
-	
+
 	/*
 	public static void findItem(TodoList l, String f) {
 		int count = 0;
@@ -171,6 +175,16 @@ public class TodoUtil {
 	public static void findList(TodoList l, String keyword) {
 		int count = 0;
 		for (TodoItem item : l.getList(keyword)) {
+			System.out.println(item.toString());
+			count ++;
+		}
+		System.out.printf("총 %d개의 항목을 찾았습니다.\n", count);
+	}
+	
+	
+	public static void listAll(TodoList l, int comp) {
+		int count = 0;
+		for (TodoItem item : l.getList(comp)) {
 			System.out.println(item.toString());
 			count ++;
 		}
@@ -263,7 +277,7 @@ public class TodoUtil {
 			int count = 0;
 			while (( line = reader.readLine() )!= null){
 				StringTokenizer str = new StringTokenizer(line, "##");
-				TodoItem t = new TodoItem (str.nextToken(), str.nextToken(), str.nextToken(), str.nextToken(), str.nextToken());
+				TodoItem t = new TodoItem (str.nextToken(), str.nextToken(), str.nextToken(), str.nextToken(), str.nextToken(), str.nextToken());
 				l.addItem(t);
 				count ++;
 			}
@@ -274,5 +288,4 @@ public class TodoUtil {
 			return;
 		}
 	}
-
 }

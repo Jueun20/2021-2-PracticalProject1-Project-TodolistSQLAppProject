@@ -14,7 +14,7 @@ public class TodoMain {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
-		l.importData("todolist.txt");
+		//l.importData("todolist.txt");
 		
 		boolean isList = false;
 		boolean quit = false;
@@ -83,6 +83,14 @@ public class TodoMain {
 				TodoUtil.listAll(l, "due_date", 0);
 				isList = true;
 				break;
+				
+			case "comp":
+				int index = Integer.parseInt(keyWord);
+				TodoUtil.completeItem(l, index);
+				break;
+				
+			case "ls_comp":
+				TodoUtil.listAll(l, 1);
 				
 			case "help":
 				Menu.displaymenu();
