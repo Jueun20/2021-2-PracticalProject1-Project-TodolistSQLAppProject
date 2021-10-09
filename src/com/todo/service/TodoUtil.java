@@ -26,12 +26,12 @@ public class TodoUtil {
 		
 		System.out.print("[항목 추가]\n" + "추가할 항목의 제목을 입력하세요 > ");
 		title = sc.next().trim();
-		
+		/*
 		if (l.isDuplicate(title)) {
 			System.out.println("제목 [" + title + "] 이 이미 존재합니다!");
 			return;
 		}
-		
+		*/
 		sc.nextLine();
 		System.out.print("추가할 항목의 카테고리를 입력하세요 > ");
 		category = sc.next().trim();
@@ -51,13 +51,17 @@ public class TodoUtil {
 	
 	public static void deleteItem(TodoList l) {
 		
-		ArrayList list = l.getList();
-		int count = list.size();
-		
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("[항목 삭제]\n" + "삭제할 항목의 번호를 입력하세요 > ");
-		int num = sc.nextInt();
+		int index = sc.nextInt();
+		
+		if (l.deleteItem(index) > 0)
+			System.out.println(index + "번 항목이 삭제되었습니다.");
+		
+		/*
+		ArrayList list = l.getList();
+		int count = list.size();
 		
 		if (num < 0 || num > list.size()) {
 			System.out.println("번호가 잘못되었습니다!");
@@ -73,7 +77,7 @@ public class TodoUtil {
 			l.deleteItem(deliItem);
 			System.out.println(num + "번 항목이 삭제되었습니다.");
 		}
-		/*
+
 		for (TodoItem item : l.getList()) {
 			if (title.equals(title)) {
 				l.deleteItem(item);
@@ -89,31 +93,17 @@ public class TodoUtil {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		ArrayList<TodoItem> list = l.getList();
-		int count = list.size();
-		
 		System.out.print("[항목 수정]\n" + "수정할 항목의 번호를 입력하세요 > ");
-		int num = sc.nextInt();
-		
-		if (num < 0 || num > list.size()) {
-			System.out.println("번호가 잘못되었습니다!");
-			return;
-		}
-		
-		int index = num - 1;
-		TodoItem editem = (TodoItem) list.get(index);
-		String title = editem.getTitle();
-		
-		System.out.println(num + ". " + editem.toString() + "\n");
+		int index = sc.nextInt();
 
 		System.out.print("새로운 제목을 입력하세요 > ");
 		String new_title = sc.next().trim();
-		
+		/*
 		if (l.isDuplicate(new_title)) {
 			System.out.println("제목 [" + new_title + "] 이 이미 존재합니다!");
 			return;
 		}
-		
+		*/
 		sc.nextLine();
 		System.out.print("새로운 카테고리를 입력하세요 > ");
 		String new_cate = sc.next().trim();
@@ -137,7 +127,7 @@ public class TodoUtil {
 		TodoItem t = new TodoItem(new_cate, new_title, new_description, new_due);
 		t.setId(index);
 		if (l.updateItem(t) > 0)
-			System.out.println("수정되었습니다.");
+			System.out.println(index + "번 항목이 수정되었습니다.");
 	}
 
 	
