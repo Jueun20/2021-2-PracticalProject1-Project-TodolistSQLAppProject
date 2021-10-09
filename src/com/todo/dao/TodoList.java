@@ -322,6 +322,7 @@ public class TodoList {
 			}
 			
 			System.out.print(records + " records read!!");
+			
 			br.close();
 			
 		} catch (FileNotFoundException | SQLException e) {
