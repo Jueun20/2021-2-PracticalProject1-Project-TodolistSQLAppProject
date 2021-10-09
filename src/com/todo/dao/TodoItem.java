@@ -10,6 +10,8 @@ public class TodoItem {
     
     private String category;
     private String due_date;
+    
+    private int id;
 
     public TodoItem(String category, String title, String desc, String due_date){
         this.title=title;
@@ -58,6 +60,10 @@ public class TodoItem {
     
     public String getDue_date() {
     	return due_date;
+    }
+    
+    public void setId(int id) {
+    	this.id = id;
     }
     
     @Override

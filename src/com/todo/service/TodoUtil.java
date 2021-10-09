@@ -6,12 +6,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
 
 public class TodoUtil {
+	
+	Connection conn;
 	
 	public static void createItem(TodoList l) {
 		
@@ -132,13 +138,15 @@ public class TodoUtil {
 
 	
 	public static void listAll(TodoList l) {
-		ArrayList<TodoItem> list = l.getList();
-		int count = list.size();
-		
-		System.out.println(":: 전체 목록 (총 " + count + "개) ::");
+		System.out.printf(":: 전체 목록 (총 %d개) ::", l.getCount());
+		/*
 		for (TodoItem item : l.getList()) {
 			int num = l.indexOf(item) + 1;
 			System.out.print(num + ". ");
+			System.out.println(item.toString());
+		}
+		*/
+		for (TodoItem item : l.getList()) {
 			System.out.println(item.toString());
 		}
 	}
@@ -237,4 +245,5 @@ public class TodoUtil {
 			return;
 		}
 	}
+
 }
