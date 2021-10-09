@@ -396,7 +396,7 @@ public class TodoList {
 				pstmt.close();
 			}
 			
-			System.out.print(records + " records read!!");
+			System.out.print(records + " records read!!\n");
 			
 			br.close();
 			
