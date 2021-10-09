@@ -13,7 +13,7 @@ import com.todo.dao.TodoList;
 
 public class TodoUtil {
 	
-	public static void createItem(TodoList list) {
+	public static void createItem(TodoList l) {
 		
 		String title, desc, category, due_date;
 		Scanner sc = new Scanner(System.in);
@@ -21,7 +21,7 @@ public class TodoUtil {
 		System.out.print("[항목 추가]\n" + "추가할 항목의 제목을 입력하세요 > ");
 		title = sc.next().trim();
 		
-		if (list.isDuplicate(title)) {
+		if (l.isDuplicate(title)) {
 			System.out.println("제목 [" + title + "] 이 이미 존재합니다!");
 			return;
 		}
@@ -38,9 +38,8 @@ public class TodoUtil {
 		due_date = sc.next().trim();
 		
 		TodoItem t = new TodoItem(category, title, desc, due_date);
-		list.addItem(t);
-		
-		System.out.println("새로운 항목이 추가되었습니다.");
+		if (l.addItem(t) > 0)
+			System.out.println("새로운 항목이 추가되었습니다.");
 	}
 
 	
