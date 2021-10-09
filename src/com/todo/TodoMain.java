@@ -45,11 +45,11 @@ public class TodoMain {
 				break;
 				
 			case "find":
-				TodoUtil.findItem(l, keyWord);
+				TodoUtil.findList(l, keyWord);
 				break;
 				
 			case "find_cate":
-				TodoUtil.findCate(l, keyWord);
+				TodoUtil.findCateList(l, keyWord);
 				break;
 				
 			case "ls":

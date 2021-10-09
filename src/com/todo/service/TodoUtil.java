@@ -132,7 +132,7 @@ public class TodoUtil {
 
 	
 	public static void listAll(TodoList l) {
-		System.out.printf(":: 전체 목록 (총 %d개) ::", l.getCount());
+		System.out.printf(":: 전체 목록 (총 %d개) ::\n", l.getCount());
 		/*
 		for (TodoItem item : l.getList()) {
 			int num = l.indexOf(item) + 1;
@@ -145,7 +145,7 @@ public class TodoUtil {
 		}
 	}
 	
-	
+	/*
 	public static void findItem(TodoList l, String f) {
 		int count = 0;
 		for (TodoItem item : l.getList()) {
@@ -158,8 +158,19 @@ public class TodoUtil {
 		}
 		System.out.println("총 " + count + "개의 항목을 찾았습니다.");
 	}
+	*/
 	
 	
+	public static void findList(TodoList l, String keyword) {
+		int count = 0;
+		for (TodoItem item : l.getList(keyword)) {
+			System.out.println(item.toString());
+			count ++;
+		}
+		System.out.printf("총 %d개의 항목을 찾았습니다.\n", count);
+	}
+	
+	/*
 	public static void findCate(TodoList l, String f) {
 		int count = 0;
 		for (TodoItem item : l.getList()) {
@@ -172,9 +183,17 @@ public class TodoUtil {
 		}
 		System.out.println("총 " + count + "개의 항목을 찾았습니다.");
 	}
+	*/
+	public static void findCateList(TodoList l, String cate) {
+		int count = 0;
+		for (TodoItem item : l.getListCategory(cate)) {
+			System.out.println(item.toString());
+			count ++;
+		}
+		System.out.println("총 " + count + "개의 항목을 찾았습니다.");
+	}
 	
-	
-	
+	/*	
 	public static void listAllCate(TodoList l) {
 		LinkedHashSet<String> set = new LinkedHashSet<String>();
 		ArrayList<String> arry = new ArrayList<String>();
@@ -199,6 +218,15 @@ public class TodoUtil {
 		}
 		
 		System.out.println("총 " + set.size() + "개의 카테고리가 등록되어 있습니다.");
+	}
+	*/
+	public static void listAllCate(TodoList l) {
+		int count = 0;
+		for (String item : l.getCategories()) {
+			System.out.print(item + " ");
+			count ++;
+		}
+		System.out.println("총 " + count + "개의 카테고리가 등록되어 있습니다.");
 	}
 	
 	
