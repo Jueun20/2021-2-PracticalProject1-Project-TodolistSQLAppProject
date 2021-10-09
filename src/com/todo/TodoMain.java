@@ -60,29 +60,27 @@ public class TodoMain {
 				TodoUtil.listAllCate(l);
 				break;
 				
-			case "ls_name_asc":
-				l.sortByName();
+			case "ls_name":
 				System.out.println("리스트의 항목들을 제목순으로 정렬하였습니다.");
+				TodoUtil.listAll(l, "title", 1);
 				isList = true;
 				break;
 
 			case "ls_name_desc":
-				l.sortByName();
 				System.out.println("리스트의 항목들을 제목의 역순으로 정렬하였습니다.");
-				l.reverseList();
+				TodoUtil.listAll(l, "title", 0);
 				isList = true;
 				break;
 				
 			case "ls_date":
-				l.sortByDate();
 				System.out.println("리스트의 항목들을 날짜순으로 정렬하였습니다.");
+				TodoUtil.listAll(l, "due_date", 1);
 				isList = true;
 				break;
 				
 			case "ls_date_desc":
-				l.sortByDate();
 				System.out.println("리스트의 항목들을 날짜의 역순으로 정렬하였습니다.");
-				l.reverseList();
+				TodoUtil.listAll(l, "due_date", 0);
 				isList = true;
 				break;
 				
@@ -100,7 +98,6 @@ public class TodoMain {
 				break;
 			}
 			
-			if(isList) TodoUtil.listAll(l);
 		} while (!quit);
 		System.out.println("프로그램이 종료되었습니다.");
 		TodoUtil.saveList(l, "todolist.txt");

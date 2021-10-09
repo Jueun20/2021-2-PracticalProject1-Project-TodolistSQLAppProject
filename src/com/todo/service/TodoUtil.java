@@ -145,6 +145,13 @@ public class TodoUtil {
 		}
 	}
 	
+	public static void listAll(TodoList l, String orderby, int ordering) {
+		System.out.printf(":: 전체 목록 (총 %d개) ::\n", l.getCount());
+		for (TodoItem item : l.getOrderedList(orderby, ordering)) {
+			System.out.println(item.toString());
+		}
+	}
+	
 	/*
 	public static void findItem(TodoList l, String f) {
 		int count = 0;
@@ -226,7 +233,7 @@ public class TodoUtil {
 			System.out.print(item + " ");
 			count ++;
 		}
-		System.out.println("총 " + count + "개의 카테고리가 등록되어 있습니다.");
+		System.out.println("\n총 " + count + "개의 카테고리가 등록되어 있습니다.");
 	}
 	
 	

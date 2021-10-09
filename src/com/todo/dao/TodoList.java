@@ -224,12 +224,44 @@ public class TodoList {
 		return list;
 	}
 	
-	
+	public ArrayList<TodoItem> getOrderedList(String orderby, int ordering) {
+		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			String sql = "SELECT * FROM list ORDER BY " + orderby;
+			if (ordering == 0)
+				sql += " desc;";
+			else
+				sql += ";";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				
+				String category = rs.getString("category");
+				String title = rs.getString("title");
+				String description = rs.getString("memo");
+				String due_date = rs.getString("due_date");
+				String current_date = rs.getString("current_date");
+				
+				TodoItem t = new TodoItem(category, title, description, due_date);
+				t.setId(id);
+				t.setCurrent_date(current_date);
+				list.add(t);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	/*
 	public void sortByName() {
 		Collections.sort(list, new TodoSortByName());
 
 	}
-	
+
 	public void reverseList() {
 		Collections.reverse(list);
 	}
@@ -237,7 +269,7 @@ public class TodoList {
 	public void sortByDate() {
 		Collections.sort(list, new TodoSortByDate());
 	}
-
+	*/
 	public int indexOf(TodoItem t) {
 		return list.indexOf(t);
 	}
