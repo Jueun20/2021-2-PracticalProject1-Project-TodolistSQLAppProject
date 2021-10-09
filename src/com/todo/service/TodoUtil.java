@@ -26,12 +26,12 @@ public class TodoUtil {
 		
 		System.out.print("[항목 추가]\n" + "추가할 항목의 제목을 입력하세요 > ");
 		title = sc.next().trim();
-		/*
+		
 		if (l.isDuplicate(title)) {
-			System.out.println("제목 [" + title + "] 이 이미 존재합니다!");
+			System.out.println("제목 [" + title + "]이 이미 존재합니다!");
 			return;
 		}
-		*/
+		
 		sc.nextLine();
 		System.out.print("추가할 항목의 카테고리를 입력하세요 > ");
 		category = sc.next().trim();

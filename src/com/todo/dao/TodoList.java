@@ -275,9 +275,22 @@ public class TodoList {
 	}
 
 	public Boolean isDuplicate(String title) {
-		for (TodoItem item : list) {
-			if (title.equals(item.getTitle())) return true;
+		int count = 0;
+		PreparedStatement pstmt;
+		String sql = "SELECT count(id) FROM list WHERE title = ?;";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			count = rs.getInt("count(id)");
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		if (count > 0)
+			return true;
 		return false;
 	}
 	
