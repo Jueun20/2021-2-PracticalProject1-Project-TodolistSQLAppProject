@@ -124,7 +124,7 @@ public class TodoUtil {
 
 		System.out.print("새로운 마감 날짜를 입력하세요(YYYY/MM/DD) > ");
 		String new_due = sc.next().trim();
-		
+		/*
 		for (TodoItem item : l.getList()) {
 			if (item.getTitle().equals(title)) {
 				//l.deleteItem(item);
@@ -133,7 +133,11 @@ public class TodoUtil {
 				System.out.println("수정되었습니다.");
 			}
 		}
-		
+		*/
+		TodoItem t = new TodoItem(new_cate, new_title, new_description, new_due);
+		t.setId(index);
+		if (l.updateItem(t) > 0)
+			System.out.println("수정되었습니다.");
 	}
 
 	
