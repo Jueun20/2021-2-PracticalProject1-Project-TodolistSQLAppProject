@@ -27,9 +27,21 @@ public class TodoMain {
 			isList = false;
 			String[] input = sc.nextLine().trim().split(" ");
 			String choice = input[0];
+			
 			String keyWord = "";
+			
+			int index = 0;
 			if (input.length == 2)
 				 keyWord = input[1];
+			else {
+				for (int i = 1; i < input.length; i ++) {
+					if (i != (input.length - 1))
+						keyWord = keyWord + input[i] + " ";
+					else
+						keyWord = keyWord + input[i];
+				}
+			}
+			
 			switch (choice) {
 
 			case "add":
@@ -85,12 +97,36 @@ public class TodoMain {
 				break;
 				
 			case "comp":
-				int index = Integer.parseInt(keyWord);
-				TodoUtil.completeItem(l, index);
+				//index = Integer.parseInt(keyWord);
+				TodoUtil.completeItem(l, keyWord);
 				break;
 				
 			case "ls_comp":
 				TodoUtil.listAll(l, 1);
+				break;
+			
+			case "have_to":
+				TodoUtil.listAll(l, 0);
+				break;
+				
+			case "rank":
+				TodoUtil.rankItem(l);
+				break;
+				
+			case "ls_rank":
+				TodoUtil.listAllRank(l, 0);
+				break;
+				
+			case "star":
+				index = Integer.parseInt(keyWord);
+				TodoUtil.importanceItem(l, index);
+				break;
+				
+			case "ls_star":
+				System.out.println("리스트의 항목들을 중요도순으로 정렬하였습니다.");
+				TodoUtil.listAll(l, "importance", 0);
+				isList = true;
+				break;
 				
 			case "help":
 				Menu.displaymenu();

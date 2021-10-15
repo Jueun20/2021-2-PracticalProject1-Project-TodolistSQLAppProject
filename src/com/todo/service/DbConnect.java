@@ -22,7 +22,7 @@ public class DbConnect {
 		if (conn == null) {
 			try {
 				Class.forName("org.sqlite.JDBC");
-				conn = DriverManager.getConnection("jdbc:sqlite:" + "todolist.db");
+				conn = DriverManager.getConnection("jdbc:sqlite:" + "todolistproject 복사본.db");
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

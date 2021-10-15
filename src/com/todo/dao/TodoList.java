@@ -110,6 +110,47 @@ public class TodoList {
 		return count;
 	}
 	
+	public int rankItem(int index, int rank) {
+		String sql = "update list set rank = ? where id = ?;";
+		PreparedStatement pstmt;
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rank);
+			pstmt.setInt(2, index);
+			
+			count = pstmt.executeUpdate();
+			
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int importanceItem(int index, int importance) {
+		String sql = "update list set importance = ? where id = ?;";
+		PreparedStatement pstmt;
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, importance);
+			pstmt.setInt(2, index);
+			
+			count = pstmt.executeUpdate();
+			
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
 	/*
 	public ArrayList<TodoItem> getList() {
 		return new ArrayList<TodoItem>(list);
@@ -132,13 +173,21 @@ public class TodoList {
 				String current_date = rs.getString("current_date");
 				
 				int temp = rs.getInt("is_completed");
-				
 				String is_completed = Integer.toString(temp);
+				
+				int temp1 = rs.getInt("rank");
+				int temp2 = rs.getInt("importance");
+				String rank = Integer.toString(temp1);
+				String importance = Integer.toString(temp2);
 				
 				TodoItem t = new TodoItem(category, title, description, due_date);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setIs_completed(is_completed);
+				
+				t.setRank(rank);
+				t.setImportance(importance);
+				
 				list.add(t);
 			}
 			stmt.close();
@@ -169,13 +218,21 @@ public class TodoList {
 				String current_date = rs.getString("current_date");
 				
 				int temp = rs.getInt("is_completed");
-				
 				String is_completed = Integer.toString(temp);
+				
+				int temp1 = rs.getInt("rank");
+				int temp2 = rs.getInt("importance");
+				String rank = Integer.toString(temp1);
+				String importance = Integer.toString(temp2);
 				
 				TodoItem t = new TodoItem(category, title, description, due_date);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setIs_completed(is_completed);
+				
+				t.setRank(rank);
+				t.setImportance(importance);
+				
 				list.add(t);
 			}
 			pstmt.close();
@@ -203,13 +260,63 @@ public class TodoList {
 				String current_date = rs.getString("current_date");
 				
 				int temp = rs.getInt("is_completed");
-				
 				String is_completed = Integer.toString(temp);
+				
+				int temp1 = rs.getInt("rank");
+				int temp2 = rs.getInt("importance");
+				String rank = Integer.toString(temp1);
+				String importance = Integer.toString(temp2);
 				
 				TodoItem t = new TodoItem(category, title, description, due_date);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setIs_completed(is_completed);
+				
+				t.setRank(rank);
+				t.setImportance(importance);
+				
+				list.add(t);
+			}
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<TodoItem> getListRank(int comp) {
+		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
+		PreparedStatement pstmt;
+		String sql = "SELECT * FROM list WHERE rank != " + comp + ";";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				
+				String category = rs.getString("category");
+				String title = rs.getString("title");
+				String description = rs.getString("memo");
+				String due_date = rs.getString("due_date");
+				String current_date = rs.getString("current_date");
+				
+				int temp = rs.getInt("is_completed");
+				String is_completed = Integer.toString(temp);
+				
+				int temp1 = rs.getInt("rank");
+				int temp2 = rs.getInt("importance");
+				String rank = Integer.toString(temp1);
+				String importance = Integer.toString(temp2);
+				
+				TodoItem t = new TodoItem(category, title, description, due_date);
+				t.setId(id);
+				t.setCurrent_date(current_date);
+				t.setIs_completed(is_completed);
+				
+				t.setRank(rank);
+				t.setImportance(importance);
+				
 				list.add(t);
 			}
 			pstmt.close();
@@ -276,13 +383,21 @@ public class TodoList {
 				String current_date = rs.getString("current_date");
 				
 				int temp = rs.getInt("is_completed");
-				
 				String is_completed = Integer.toString(temp);
+				
+				int temp1 = rs.getInt("rank");
+				int temp2 = rs.getInt("importance");
+				String rank = Integer.toString(temp1);
+				String importance = Integer.toString(temp2);
 				
 				TodoItem t = new TodoItem(category, title, description, due_date);
 				t.setId(id);
 				t.setIs_completed(is_completed);
 				t.setCurrent_date(current_date);
+				
+				t.setRank(rank);
+				t.setImportance(importance);
+				
 				list.add(t);
 			}
 			pstmt.close();
@@ -314,13 +429,21 @@ public class TodoList {
 				String current_date = rs.getString("current_date");
 				
 				int temp = rs.getInt("is_completed");
-				
 				String is_completed = Integer.toString(temp);
+				
+				int temp1 = rs.getInt("rank");
+				int temp2 = rs.getInt("importance");
+				String rank = Integer.toString(temp1);
+				String importance = Integer.toString(temp2);
 				
 				TodoItem t = new TodoItem(category, title, description, due_date);
 				t.setId(id);
 				t.setIs_completed(is_completed);
 				t.setCurrent_date(current_date);
+				
+				t.setRank(rank);
+				t.setImportance(importance);
+				
 				list.add(t);
 			}
 			stmt.close();
@@ -372,12 +495,16 @@ public class TodoList {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filename));
 			String line;
-			String sql = "insert into list (title, memo, category, current_date, due_date)" + " values (?,?,?,?,?);";
+			String sql = "insert into list (title, memo, category, current_date, due_date, is_completed, importance, rank)" + " values (?,?,?,?,?,?,?,?);";
 			
 			int records = 0;
 			while ((line = br.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(line, "##");
+				
+				String importance = st.nextToken();
+				String rank = st.nextToken();
 				String is_completed = st.nextToken();
+				
 				String category = st.nextToken();
 				String title = st.nextToken();
 				String description = st.nextToken();
@@ -390,6 +517,9 @@ public class TodoList {
 				pstmt.setString(3, category);
 				pstmt.setString(4, current_date);
 				pstmt.setString(5, due_date);
+				pstmt.setString(6, is_completed);
+				pstmt.setString(7, importance);
+				pstmt.setString(8, rank);
 				
 				int count = pstmt.executeUpdate();
 				if (count > 0) records ++;

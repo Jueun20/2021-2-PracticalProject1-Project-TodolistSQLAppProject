@@ -18,6 +18,11 @@ public class Menu {
         System.out.println(" ls_date_desc - 항목들 날짜역순으로 정렬하기");
         System.out.println(" comp <num> - 항목 완료하기");
         System.out.println(" ls_comp - 완료된 항목만 출력하기");
+        System.out.println(" have_to - 완료되지 않은 항목만 출력하기");
+        System.out.println(" rank - 가장 중요한 세 가지 항목 우선순위 설정하기");
+        System.out.println(" ls_rank - 우선순위 1-3위 항목 출력하기");
+        System.out.println(" star <num> - 항목의 중요도 표시하기");
+        System.out.println(" ls_star - 항목의 중요도 표시하기");
         System.out.println(" exit - 프로그램 종료하기");
     }
     

@@ -54,10 +54,36 @@ public class TodoUtil {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("[항목 삭제]\n" + "삭제할 항목의 번호를 입력하세요 > ");
-		int index = sc.nextInt();
 		
-		if (l.deleteItem(index) > 0)
-			System.out.println(index + "번 항목이 삭제되었습니다.");
+		String numbers = sc.nextLine();
+		
+		int count = 0;
+		for (int i = 0; i < numbers.length(); i ++) {
+			if (numbers.charAt(i) == ',')
+				count ++;
+		}
+		
+		if (count == 0) {
+			int index = Integer.parseInt(numbers);
+			if (l.deleteItem(index) > 0) {
+				System.out.println(index + "번 항목이 삭제되었습니다.");
+				return;
+			}
+		}
+		else {
+			int chck = 0;
+			
+			String[] arry = numbers.split(", ");
+			for (String num : arry) {
+				int index = Integer.parseInt(num);
+				if (l.deleteItem(index) > 0) 
+					chck ++;
+			}
+			
+			if (chck != 0)
+				System.out.println("총 " + chck + "개의 항목이 삭제되었습니다.");
+		}
+		
 		
 		/*
 		ArrayList list = l.getList();
@@ -130,9 +156,63 @@ public class TodoUtil {
 			System.out.println(index + "번 항목이 수정되었습니다.");
 	}
 	
-	public static void completeItem(TodoList l, int index) {
-		if (l.completeItem(index) > 0)
-			System.out.println(index + "번 항목이 완료되었습니다.");
+	public static void completeItem(TodoList l, String numbers) {
+		
+		int count = 0;
+		for (int i = 0; i < numbers.length(); i ++) {
+			if (numbers.charAt(i) == ',')
+				count ++;
+		}
+		
+		if (count == 0) {
+			int index = Integer.parseInt(numbers);
+			if (l.completeItem(index) > 0) {
+				System.out.println(index + "번 항목이 완료되었습니다.");
+				return;
+			}
+		}
+		
+		else {
+			int chck = 0;
+			
+			String[] arry = numbers.split(", ");
+			for (String num : arry) {
+				int index = Integer.parseInt(num);
+				if (l.completeItem(index) > 0) 
+					chck ++;
+			}
+			
+			if (chck != 0)
+				System.out.println("총 " + chck + "개의 항목이 완료되었습니다.");
+		}
+	}
+	
+	public static void rankItem(TodoList l) {
+		Scanner sc = new Scanner(System.in);
+		
+		String total;
+		
+		System.out.print("[우선순위]\n" + "우선 순위 1-3위 순서대로 번호를 입력하세요(n, n, n) > ");
+		total = sc.nextLine().trim();
+		
+		int count = 0;
+		
+		String[] rank = total.split(", ");
+		for (int i = 0; i < 3; i ++) {
+			int index = Integer.parseInt(rank[i]);
+			count = l.rankItem(index, i + 1);
+		}
+		if (count > 0)
+			System.out.println("우선순위 설정이 완료되었습니다.");
+	}
+	
+	public static void importanceItem(TodoList l, int index) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("[중요도 표시]\n" + index + "번 항목의 중요도를 숫자로 입력하세요(1-5) > ");
+		int score = sc.nextInt();
+		
+		if (l.importanceItem(index, score) > 0)
+			System.out.println(index + "번 항목의 중요도는 " + score + "점입니다.");
 	}
 	
 	public static void listAll(TodoList l) {
@@ -190,6 +270,26 @@ public class TodoUtil {
 		}
 		System.out.printf("총 %d개의 항목을 찾았습니다.\n", count);
 	}
+	
+	//getListRank
+	public static void listAllRank(TodoList l, int num) {
+		int count = 0;
+		ArrayList<TodoItem> result = new ArrayList<TodoItem>();
+		for (TodoItem item : l.getListRank(num)) {
+			count ++;
+			result.add(item);
+		}
+		
+		Collections.sort(result, new TodoSortByRank());
+		for (int i = 0; i < 3; i ++) {
+			TodoItem t = result.get(i);
+			System.out.println(t.getRank() + "위) " + t.toStringRank());
+		}
+		
+		if (count == 0)
+			System.out.println("아직 우선순위를 설정하지 않았습니다!");
+	}
+	
 	
 	/*
 	public static void findCate(TodoList l, String f) {

@@ -13,6 +13,9 @@ public class TodoItem {
     
     private int id;
     private String is_completed;
+    
+    private String rank;
+    private String importance;
 
     public TodoItem(String category, String title, String desc, String due_date){
         this.title=title;
@@ -30,6 +33,17 @@ public class TodoItem {
         this.due_date = due_date;
         this.current_date = date;
         this.is_completed = is_completed;
+    }
+    
+    public TodoItem(String importance, String rank, String is_completed, String category, String title, String desc, String due_date, String date){
+    	this.category = category;
+        this.title=title;
+        this.desc=desc;
+        this.due_date = due_date;
+        this.current_date = date;
+        this.is_completed = is_completed;
+        this.importance = importance;
+        this.rank = rank;
     }
     
     public String getTitle() {
@@ -80,15 +94,43 @@ public class TodoItem {
     	this.is_completed = is_completed;
     }
     
+    public String getRank() {
+    	return rank;
+    }
+    
+    public void setRank(String rank) {
+    	this.rank = rank;
+    }
+    
+    public void setImportance(String importance) {
+    	this.importance = importance;
+    }
+    
     @Override
     public String toString() {
-    	if (is_completed.contains("1")) 
-    		return "V " + id + " [" + category + "] " + "|" + title + "| " + desc + " (" + due_date + ")" + " - " + current_date;
+    	String star = "";
+    	int count =  Integer.parseInt(this.importance);
     	
-    	return "  " + id + " [" + category + "] " + "|" + title + "| " + desc + " (" + due_date + ")" + " - " + current_date;
+    	for (int j = 0; j < count; j ++) {
+    		star = star + "*";
+    	}
+    		
+    	for (int k = count; k < 5; k ++) {
+    		star = star + " ";
+    	}
+    	
+    	if (is_completed.contains("1")) 
+    		return "V " + id + "[ranking:" + rank + "|" + star + "]" + " [" + category + "] " + "|" + title + "| " + desc + " (" + due_date + ")" + " - " + current_date;
+    	
+    	
+    	return "  " + id + "[ranking:" + rank + "|" + star + "]" + " [" + category + "] " + "|" + title + "| " + desc + " (" + due_date + ")" + " - " + current_date;
+    }
+    
+    public String toStringRank() {
+    	return id + " [" + category + "] " + "|" + title + "| " + desc + " (" + due_date + ")" + " - " + current_date;
     }
     
     public String toSaveString() {
-    	return is_completed + "##" + category + "##" + title + "##" + desc + "##" + due_date + "##" + current_date + "\n";
+    	return importance + "##" + rank + "##" + is_completed + "##" + category + "##" + title + "##" + desc + "##" + due_date + "##" + current_date + "\n";
     }
 }
