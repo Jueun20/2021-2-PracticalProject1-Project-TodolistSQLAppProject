@@ -15,7 +15,7 @@ public class TodoItem {
     private String is_completed;
     
     private String rank;
-    private String importance;
+    private String importance;                      
 
     public TodoItem(String category, String title, String desc, String due_date){
         this.title=title;
